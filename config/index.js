@@ -45,7 +45,8 @@ const config = {
     session: {
       header_name: 'authorization',
       secret: process.env.NODE_API_SESSION_SECRET
-    }
+    },
+    usersApi: process.env.USERS_API
   }
 };
 

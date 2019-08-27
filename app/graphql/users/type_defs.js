@@ -5,13 +5,6 @@ const rootTypes = gql`
     user(id: ID, firstName: String, email: String): User!
     users: [User]
   }
-  extend type Mutation {
-    createUser(user: UserInput!): User!
-    login(credentials: LoginInput!): AccessToken
-  }
-  extend type Subscription {
-    onLogin: String!
-  }
 `;
 
 const customTypes = gql`
