@@ -15,25 +15,4 @@ const customTypes = gql`
   }
 `;
 
-const inputTypes = gql`
-  input UserInput {
-    firstName: String!
-    lastName: String!
-    username: String!
-    email: String!
-    password: String!
-  }
-  input LoginInput {
-    username: String!
-    password: String!
-  }
-`;
-
-/* const enums = gql`
-  enum UserRoleEnum {
-    STANDARD
-    ADMIN
-  }
-`;*/
-
-exports.typeDefs = [rootTypes, customTypes, inputTypes];
+exports.typeDefs = [rootTypes, customTypes];
