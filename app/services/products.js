@@ -1,8 +1,6 @@
 const { Product, Variant } = require('../models');
 
-const getProducts = () =>
-  Product.findAll({ include: [{ model: Variant, as: 'variants' }] }).then(products =>
-    products.map(p => p.dataValues)
-  );
+const getProducts = ({ limit, offset }) =>
+  Product.findAndCountAll({ include: [{ model: Variant, as: 'variants' }], limit, offset });
 
 module.exports = { getProducts };
