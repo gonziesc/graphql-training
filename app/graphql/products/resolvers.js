@@ -1,7 +1,6 @@
-const { getProducts: getProductsFromDb } = require('../../services/users');
-const { mapUsers } = require('../../mappers/users');
+const { getProducts: getProductsFromDb } = require('../../services/products');
 
-const getProducts = (_, params) => getProductsFromDb(params).then(mapUsers);
+const getProducts = (_, params) => getProductsFromDb(params);
 
 module.exports = {
   Query: {

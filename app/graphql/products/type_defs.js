@@ -18,8 +18,8 @@ const customTypes = gql`
   }
   type Variant {
     id: ID!
-    size: Int!
-    color: String!
+    size: String!
+    color: String
     price: Int!
   }
 `;

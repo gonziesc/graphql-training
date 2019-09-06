@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: 'variants',
-      paranoid: true,
       underscored: true
     }
   );

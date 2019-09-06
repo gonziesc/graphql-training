@@ -31,13 +31,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: 'products',
-      paranoid: true,
       underscored: true
     }
   );
 
   Product.associate = models => {
-    Product.hasMany(models.Variant);
+    Product.hasMany(models.Variant, { as: 'variants' });
   };
 
   Product.getAll = () => Product.findAll();
