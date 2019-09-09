@@ -2,7 +2,7 @@ const { gql } = require('apollo-server');
 
 const rootTypes = gql`
   extend type Query {
-    products(page: Int = 1, limit: Int = 20, orderBy: OrderProductsBy, filter: String): ProductsPaginated
+    products(page: Int = 1, limit: Int = 20, filter: String): ProductsPaginated
   }
 `;
 
@@ -32,11 +32,4 @@ const customTypes = gql`
   }
 `;
 
-const enums = gql`
-  enum OrderProductsBy {
-    VENDOR
-    CATEGORY
-  }
-`;
-
-exports.typeDefs = [rootTypes, customTypes, enums];
+exports.typeDefs = [rootTypes, customTypes];
