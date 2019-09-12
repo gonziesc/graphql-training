@@ -2,7 +2,7 @@ const { gql } = require('apollo-server');
 
 const rootTypes = gql`
   extend type Query {
-    products(page: Int = 1, limit: Int = 20, filter: String): ProductsPaginated
+    products(page: Int = 1, limit: Int = 20, filter: ProductFilter): ProductsPaginated
   }
 `;
 
@@ -32,4 +32,15 @@ const customTypes = gql`
   }
 `;
 
-exports.typeDefs = [rootTypes, customTypes];
+const inputTypes = gql`
+  input ProductFilter {
+    id: ID
+    name: String
+    description: String
+    category: String
+    vendor: String
+    brand: String
+  }
+`;
+
+exports.typeDefs = [rootTypes, customTypes, inputTypes];

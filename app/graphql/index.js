@@ -16,4 +16,6 @@ const schema = makeExecutableSchema({
   resolvers: modules.resolvers
 });
 
+console.log(schema);
+
 module.exports = applyMiddleware(schema, modules.middlewares);
