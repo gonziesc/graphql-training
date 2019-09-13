@@ -30,6 +30,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  Variant.associate = models => {
+    Variant.belongsToMany(models.Order, {
+      through: 'OrderVariants',
+      as: 'orders',
+      foreignKey: 'orderId'
+    });
+  };
+
   Variant.prototype.updateModel = props => this.update(props);
 
   return Variant;
