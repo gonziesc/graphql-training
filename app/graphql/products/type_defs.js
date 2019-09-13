@@ -21,6 +21,7 @@ const customTypes = gql`
     size: String!
     color: String
     price: Int!
+    imageUrl: String!
   }
   type ProductsPaginated {
     products: [Product]

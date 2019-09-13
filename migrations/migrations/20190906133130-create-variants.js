@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      image_url: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       product_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
