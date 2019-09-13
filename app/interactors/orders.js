@@ -1,4 +1,4 @@
-const { getOrders: getOrdersFromDb, create } = require('../services/orders');
+const { getOrders: getOrdersFromDb, create, getOrder } = require('../services/orders');
 const { getUsers } = require('../services/users');
 const { mapOrders } = require('../serializers/orders');
 
@@ -14,4 +14,4 @@ const getOrders = ({ limit, offset }) =>
     )
   );
 
-module.exports = { getOrders, create };
+module.exports = { getOrders, create, getOrder };

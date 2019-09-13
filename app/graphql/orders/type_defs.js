@@ -6,6 +6,7 @@ const rootTypes = gql`
   }
   extend type Query {
     orders(page: Int = 1, limit: Int = 20): OrdersPaginated
+    order(id: ID!): Order
   }
 `;
 

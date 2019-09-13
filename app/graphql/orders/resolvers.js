@@ -1,10 +1,12 @@
-const { getOrders: getOrdersFromDb, create } = require('../../interactors/orders');
+const { getOrders: getOrdersFromDb, create, getOrder: getOrderFromDb } = require('../../interactors/orders');
 const { calculateTotalAmount } = require('../../services/variants');
 
 const getOrders = (_, { page, limit }) => {
   const offset = (page - 1) * limit;
   return getOrdersFromDb({ limit, offset });
 };
+
+const getOrder = (_, { id }) => getOrderFromDb({ id });
 
 const createOrder = async (_, { order }) => {
   const totalAmount = await calculateTotalAmount(order.variants);
@@ -23,6 +25,7 @@ module.exports = {
     order: createOrder
   },
   Query: {
-    orders: getOrders
+    orders: getOrders,
+    order: getOrder
   }
 };

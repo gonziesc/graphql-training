@@ -1,4 +1,5 @@
 const { Order, Variant, OrderVariants } = require('../models');
+const errors = require('../errors');
 
 const getOrders = ({ limit, offset }) =>
   Order.findAndCountAll({
@@ -20,4 +21,20 @@ const create = ({ order, variants }) =>
     ).then(() => orderCreated)
   );
 
-module.exports = { getOrders, create };
+const getOrder = ({ id }) =>
+  Order.findOne({
+    where: { id },
+    include: [{ model: Variant, as: 'variants' }],
+    through: { attributes: [] }
+  })
+    .then(order => {
+      if (!order) {
+        throw errors.notFound(`order with id ${id} not found`);
+      }
+      return order;
+    })
+    .catch(error => {
+      throw errors.databaseError(`${error.name}: ${error.message}`);
+    });
+
+module.exports = { getOrders, create, getOrder };
