@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     Order.belongsToMany(models.Variant, {
       through: 'OrderVariants',
       as: 'variants',
-      foreignKey: 'variantId'
+      foreignKey: 'orderId'
     });
   };
 

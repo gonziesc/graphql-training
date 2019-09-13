@@ -1,6 +1,12 @@
-const { Order, OrderVariants } = require('../models');
+const { Order, Variant, OrderVariants } = require('../models');
 
-const getOrders = ({ limit, offset }) => Order.findAndCountAll({ limit, offset });
+const getOrders = ({ limit, offset }) =>
+  Order.findAndCountAll({
+    limit,
+    offset,
+    include: [{ model: Variant, as: 'variants' }],
+    through: { attributes: [] }
+  });
 
 const create = ({ order, variants }) =>
   Order.create(order).then(orderCreated =>
