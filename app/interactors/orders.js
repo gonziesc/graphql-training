@@ -1,17 +1,20 @@
-const { getOrders: getOrdersFromDb, create, getOrder } = require('../services/orders');
-const { getUsers } = require('../services/users');
+const { getOrders: getOrdersFromDb, create, getOrder, getOrderVariantsIds } = require('../services/orders');
+const { getUser } = require('../services/users');
+const { getSumOfVariantPrices, getVariants } = require('../services/variants');
 const { mapOrders } = require('../serializers/orders');
 
 const getOrders = ({ limit, offset }) =>
   getOrdersFromDb({ limit, offset }).then(orders =>
-    getUsers().then(users =>
-      mapOrders({
-        limit,
-        offset,
-        orders,
-        users: users.filter(user => orders.rows.map(order => order.userExternalId).includes(user.id))
-      })
-    )
+    mapOrders({
+      limit,
+      offset,
+      orders
+    })
   );
 
-module.exports = { getOrders, create, getOrder };
+const calculateTotalAmount = variantsIds => getSumOfVariantPrices(variantsIds);
+
+const getOrderVariants = ({ orderId }) =>
+  getOrderVariantsIds({ orderId }).then(variantsIds => getVariants(variantsIds));
+
+module.exports = { getOrders, create, getOrder, getOrderVariants, calculateTotalAmount, getUser };

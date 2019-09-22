@@ -5,10 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       orderId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Order',
-          key: 'id'
-        }
+        primaryKey: true
       },
       variantId: {
         type: DataTypes.INTEGER,
@@ -16,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         references: {
           model: 'Variant',
           key: 'id'
-        }
+        },
+        primaryKey: true
       }
     },
     {

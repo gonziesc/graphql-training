@@ -1,12 +1,10 @@
-const { Order, Variant, OrderVariants } = require('../models');
+const { Order, OrderVariants } = require('../models');
 const errors = require('../errors');
 
 const getOrders = ({ limit, offset }) =>
   Order.findAndCountAll({
     limit,
-    offset,
-    include: [{ model: Variant, as: 'variants' }],
-    through: { attributes: [] }
+    offset
   });
 
 const create = ({ order, variants }) =>
@@ -23,9 +21,7 @@ const create = ({ order, variants }) =>
 
 const getOrder = ({ id }) =>
   Order.findOne({
-    where: { id },
-    include: [{ model: Variant, as: 'variants' }],
-    through: { attributes: [] }
+    where: { id }
   })
     .then(order => {
       if (!order) {
@@ -37,4 +33,11 @@ const getOrder = ({ id }) =>
       throw errors.databaseError(`${error.name}: ${error.message}`);
     });
 
-module.exports = { getOrders, create, getOrder };
+const getOrderVariantsIds = ({ orderId }) =>
+  OrderVariants.findAll({ where: { order_id: orderId } })
+    .then(variants => variants.map(({ variantId }) => variantId))
+    .catch(error => {
+      throw errors.databaseError(`${error.name}: ${error.message}`);
+    });
+
+module.exports = { getOrders, create, getOrder, getOrderVariantsIds };

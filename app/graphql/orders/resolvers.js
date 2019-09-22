@@ -1,5 +1,11 @@
-const { getOrders: getOrdersFromDb, create, getOrder: getOrderFromDb } = require('../../interactors/orders');
-const { calculateTotalAmount } = require('../../services/variants');
+const {
+  getOrders: getOrdersFromDb,
+  create,
+  getOrder: getOrderFromDb,
+  getOrderVariants,
+  calculateTotalAmount,
+  getUser: getUserFromExternalService
+} = require('../../interactors/orders');
 
 const getOrders = (_, { page, limit }) => {
   const offset = (page - 1) * limit;
@@ -20,6 +26,10 @@ const createOrder = async (_, { order }) => {
   });
 };
 
+const getVariants = ({ id: orderId }) => getOrderVariants({ orderId });
+
+const getUser = ({ userExternalId }) => getUserFromExternalService(userExternalId);
+
 module.exports = {
   Mutation: {
     order: createOrder
@@ -27,5 +37,9 @@ module.exports = {
   Query: {
     orders: getOrders,
     order: getOrder
+  },
+  Order: {
+    variants: getVariants,
+    user: getUser
   }
 };

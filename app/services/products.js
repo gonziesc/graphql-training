@@ -1,6 +1,5 @@
-const { Product, Variant } = require('../models');
+const { Product } = require('../models');
 
-const getProducts = ({ limit, offset, where }) =>
-  Product.findAndCountAll({ include: [{ model: Variant, as: 'variants' }], limit, offset, ...where });
+const getProducts = ({ limit, offset, where }) => Product.findAndCountAll({ limit, offset, ...where });
 
 module.exports = { getProducts };
