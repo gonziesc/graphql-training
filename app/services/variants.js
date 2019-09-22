@@ -1,7 +1,7 @@
 const { Variant } = require('../models');
 
-const getVariants = variantsIds => {
-  const where = variantsIds && { id: variantsIds };
+const getVariants = params => {
+  const where = params && { ...params };
   return Variant.findAll({ where });
 };
 

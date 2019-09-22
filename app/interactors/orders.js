@@ -15,6 +15,6 @@ const getOrders = ({ limit, offset }) =>
 const calculateTotalAmount = variantsIds => getSumOfVariantPrices(variantsIds);
 
 const getOrderVariants = ({ orderId }) =>
-  getOrderVariantsIds({ orderId }).then(variantsIds => getVariants(variantsIds));
+  getOrderVariantsIds({ orderId }).then(variantsIds => getVariants({ id: variantsIds }));
 
 module.exports = { getOrders, create, getOrder, getOrderVariants, calculateTotalAmount, getUser };
