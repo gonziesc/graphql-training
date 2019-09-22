@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       orderId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Order',
+          key: 'id'
+        },
         primaryKey: true
       },
       variantId: {
