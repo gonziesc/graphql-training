@@ -1,8 +1,10 @@
 const { Variant } = require('../models');
 
-const calculateTotalAmount = variants =>
-  Variant.findAll({ where: { id: variants } }).then(variantsResponse =>
-    variantsResponse.map(variant => variant.dataValues.price).reduce((a, b) => a + b, 0)
-  );
+const getVariants = params => {
+  const where = params && { ...params };
+  return Variant.findAll({ where });
+};
 
-module.exports = { calculateTotalAmount };
+const getSumOfVariantPrices = variantsIds => Variant.sum('price', { where: { id: variantsIds } });
+
+module.exports = { getSumOfVariantPrices, getVariants };

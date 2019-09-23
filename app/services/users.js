@@ -8,4 +8,11 @@ const getUsers = () =>
     json: true
   });
 
-module.exports = { getUsers };
+const getUser = userId =>
+  request({
+    url: `${USERS_API}/users/${userId}`,
+    method: 'get',
+    json: true
+  });
+
+module.exports = { getUsers, getUser };
