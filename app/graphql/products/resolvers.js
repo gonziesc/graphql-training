@@ -1,4 +1,5 @@
 const { getProducts: getProductsFromDb } = require('../../services/products');
+const { getVariants: getVariantsFromDb } = require('../../services/variants');
 const { mapProducts } = require('../../serializers/products');
 const Sequelize = require('sequelize');
 
@@ -20,8 +21,13 @@ const getProducts = (_, { page, limit, filter }) => {
   return getProductsFromDb({ limit, offset, where }).then(products => mapProducts({ products, page, limit }));
 };
 
+const getVariants = ({ id: productId }) => getVariantsFromDb({ productId });
+
 module.exports = {
   Query: {
     products: getProducts
+  },
+  Product: {
+    variants: getVariants
   }
 };
