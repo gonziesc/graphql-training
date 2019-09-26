@@ -35,7 +35,15 @@ const customTypes = gql`
 
 const inputTypes = gql`
   input ProductFilter {
+    where: ProductWhere
+    like: ProductLike
+  }
+
+  input ProductWhere {
     id: ID
+  }
+
+  input ProductLike {
     name: String
     description: String
     category: String
